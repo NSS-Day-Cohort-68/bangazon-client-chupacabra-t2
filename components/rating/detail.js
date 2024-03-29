@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react'
-import { rateProduct } from '../../data/products'
-import { RatingsContainer } from './container'
-import { Header } from './header'
+import { useState, useEffect } from "react"
+import { rateProduct } from "../../data/products"
+import { RatingsContainer } from "./container"
+import { Header } from "./header"
 
-export function Ratings({ average_rating, refresh, ratings = [], number_purchased, likes = [] }) {
+export function Ratings({
+  average_rating,
+  refresh,
+  ratings = [],
+  number_purchased,
+  likes = [],
+}) {
   const [productId, setProductId] = useState(0)
   const saveRating = (newRating) => {
     rateProduct(productId, newRating).then(refresh)
-
   }
 
   useEffect(() => {
@@ -18,7 +23,7 @@ export function Ratings({ average_rating, refresh, ratings = [], number_purchase
 
   return (
     <div className="tile is-ancestor is-flex-wrap-wrap">
-      <Header 
+      <Header
         averageRating={average_rating}
         ratingsLen={ratings.length}
         numberPurchased={number_purchased}

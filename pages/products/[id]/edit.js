@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
-import { useRef, useEffect, useState } from 'react'
-import Layout from '../../../components/layout'
-import Navbar from '../../../components/navbar'
-import { editProduct, getProductById } from '../../../data/products'
-import ProductForm from '../../../components/product/form'
-import { useAppContext } from '../../../context/state'
+import { useRouter } from "next/router"
+import { useRef, useEffect, useState } from "react"
+import Layout from "../../../components/layout"
+import Navbar from "../../../components/navbar"
+import { editProduct, getProductById } from "../../../data/products"
+import ProductForm from "../../../components/product/form"
+import { useAppContext } from "../../../context/state"
 
 export default function NewProduct() {
   const formEl = useRef()
@@ -15,7 +15,7 @@ export default function NewProduct() {
 
   useEffect(() => {
     if (id && profile) {
-      getProductById(id).then(productData => {
+      getProductById(id).then((productData) => {
         if (productData) {
           if (productData.store.id === profile.store?.id) {
             setProduct(productData)
@@ -29,7 +29,8 @@ export default function NewProduct() {
 
   useEffect(() => {
     if (product) {
-      const { name, description, price, category, location, quantity } = formEl.current
+      const { name, description, price, category, location, quantity } =
+        formEl.current
 
       name.value = product.name
       description.value = product.description
@@ -40,9 +41,9 @@ export default function NewProduct() {
     }
   }, [formEl, product])
 
-
   const saveProduct = () => {
-    const { name, description, price, category, location, quantity } = formEl.current
+    const { name, description, price, category, location, quantity } =
+      formEl.current
 
     const product = {
       name: name.value,
@@ -50,7 +51,7 @@ export default function NewProduct() {
       price: price.value,
       categoryId: category.value,
       location: location.value,
-      quantity: quantity.value
+      quantity: quantity.value,
     }
 
     editProduct(id, product).then(() => router.push(`/products/${id}`))
