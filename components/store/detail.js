@@ -1,18 +1,14 @@
-import Link from 'next/link'
+import Link from "next/link"
 
 export default function Detail({ store, isOwner, favorite, unfavorite }) {
   const ownerButtons = () => {
     return (
       <div className="buttons">
         <Link href={`/stores/${store.id}/edit`}>
-          <a className="button is-primary is-inverted">
-            Edit Store
-          </a>
+          <a className="button is-primary is-inverted">Edit Store</a>
         </Link>
         <Link href="/products/new">
-          <a className="button is-primary is-inverted">
-            Add a Product
-          </a>
+          <a className="button is-primary is-inverted">Add a Product</a>
         </Link>
       </div>
     )
@@ -20,22 +16,24 @@ export default function Detail({ store, isOwner, favorite, unfavorite }) {
   const userButtons = () => {
     return (
       <>
-        {
-          store.is_favorite ?
-            <button className="button is-primary is-inverted" onClick={unfavorite}>
-              <span className="icon is-small">
-                <i className="fas fa-heart-broken"></i>
-              </span>
-              <span>Unfavorite Store</span>
-            </button>
-            :
-            <button className="button is-primary is-inverted" onClick={favorite}>
-              <span className="icon is-small">
-                <i className="fas fa-heart"></i>
-              </span>
-              <span>Favorite Store</span>
-            </button>
-        }
+        {store.is_favorite ? (
+          <button
+            className="button is-primary is-inverted"
+            onClick={unfavorite}
+          >
+            <span className="icon is-small">
+              <i className="fas fa-heart-broken"></i>
+            </span>
+            <span>Unfavorite Store</span>
+          </button>
+        ) : (
+          <button className="button is-primary is-inverted" onClick={favorite}>
+            <span className="icon is-small">
+              <i className="fas fa-heart"></i>
+            </span>
+            <span>Favorite Store</span>
+          </button>
+        )}
       </>
     )
   }
@@ -47,24 +45,15 @@ export default function Detail({ store, isOwner, favorite, unfavorite }) {
           <div className="navbar-menu">
             <div className="navbar-end">
               <span className="navbar-item">
-                {
-                  isOwner ?
-                    ownerButtons()
-                    :
-                    userButtons()
-                }
+                {isOwner ? ownerButtons() : userButtons()}
               </span>
             </div>
           </div>
         </nav>
       </div>
       <div className="hero-body">
-        <p className="title">
-          {store.name}
-        </p>
-        <p className="subtitle">
-          {store.description}
-        </p>
+        <p className="title">{store.name}</p>
+        <p className="subtitle">{store.description}</p>
       </div>
     </section>
   )

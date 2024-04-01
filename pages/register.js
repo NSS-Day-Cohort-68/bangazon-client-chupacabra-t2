@@ -1,19 +1,19 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useRef } from 'react'
-import { Input } from '../components/form-elements'
-import Layout from '../components/layout'
-import Navbar from '../components/navbar'
-import { useAppContext } from '../context/state'
-import { register } from '../data/auth'
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useRef } from "react"
+import { Input } from "../components/form-elements"
+import Layout from "../components/layout"
+import Navbar from "../components/navbar"
+import { useAppContext } from "../context/state"
+import { register } from "../data/auth"
 
 export default function Register() {
-  const {setToken} = useAppContext()
+  const { setToken } = useAppContext()
 
-  const firstName = useRef('')
-  const lastName = useRef('')
-  const username = useRef('')
-  const password = useRef('')
+  const firstName = useRef("")
+  const lastName = useRef("")
+  const username = useRef("")
+  const password = useRef("")
   const router = useRouter()
 
   const submit = (e) => {
@@ -23,13 +23,13 @@ export default function Register() {
       username: username.current.value,
       password: password.current.value,
       first_name: firstName.current.value,
-      last_name: lastName.current.value
+      last_name: lastName.current.value,
     }
 
     register(user).then((res) => {
       if (res.token) {
         setToken(res.token)
-        router.push('/')
+        router.push("/")
       }
     })
   }
@@ -45,19 +45,9 @@ export default function Register() {
             type="text"
             label="First Name"
           />
-          <Input
-            id="lastName"
-            refEl={lastName}
-            type="text"
-            label="Last Name"
-          />
+          <Input id="lastName" refEl={lastName} type="text" label="Last Name" />
 
-          <Input
-            id="username"
-            refEl={username}
-            type="text"
-            label="Username"
-          />
+          <Input id="username" refEl={username} type="text" label="Username" />
           <Input
             id="password"
             refEl={password}
@@ -67,7 +57,9 @@ export default function Register() {
 
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-link" onClick={submit}>Submit</button>
+              <button className="button is-link" onClick={submit}>
+                Submit
+              </button>
             </div>
             <div className="control">
               <Link href="/login">

@@ -1,4 +1,9 @@
-export function Header({ averageRating, ratingsLen, numberPurchased, likesLength }) {
+export function Header({
+  averageRating,
+  ratingsLen,
+  numberPurchased,
+  likesLength,
+}) {
   return (
     <div className="tile is-parent is-12">
       <div className="tile is-child">

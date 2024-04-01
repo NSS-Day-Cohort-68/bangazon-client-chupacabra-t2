@@ -6,15 +6,15 @@ export default function Modal({ showModal, setShowModal, title, children }) {
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">{title}</p>
-          <button className="delete" aria-label="close" onClick={() => setShowModal(false)}></button>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={() => setShowModal(false)}
+          ></button>
         </header>
-        <section className="modal-card-body">
-          {body}
-        </section>
+        <section className="modal-card-body">{body}</section>
 
-        <footer className="modal-card-foot">
-          {footer}
-        </footer>
+        <footer className="modal-card-foot">{footer}</footer>
       </div>
     </div>
   )

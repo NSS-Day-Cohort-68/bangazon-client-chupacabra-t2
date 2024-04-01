@@ -1,4 +1,4 @@
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from "react-simple-star-rating"
 
 export function RatingCard({ rating }) {
   return (
@@ -9,9 +9,7 @@ export function RatingCard({ rating }) {
         </figure>
         <div className="media-content">
           <div className="content">
-            <p>
-              {rating.review}
-            </p>
+            <p>{rating.review}</p>
           </div>
         </div>
       </article>

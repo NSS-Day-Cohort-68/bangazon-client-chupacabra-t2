@@ -1,3 +1,3 @@
 export default {
-    apiHost: process.env.REACT_APP_API_URI
+  apiHost: process.env.REACT_APP_API_URI,
 }
