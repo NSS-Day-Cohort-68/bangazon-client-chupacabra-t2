@@ -21,9 +21,14 @@ export function register(user) {
 }
 
 export function getUserProfile() {
+  const token = localStorage.getItem("token")
+  if (!token) {
+    // Handle case where token is not available
+    return Promise.reject("Token not found in localStorage")
+  }
   return fetchWithResponse("profile", {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${token}`,
     },
   })
 }
