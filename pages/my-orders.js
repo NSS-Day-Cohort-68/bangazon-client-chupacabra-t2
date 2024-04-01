@@ -17,15 +17,24 @@ export default function Orders() {
     })
   }, [])
 
+  // Function to calculate total price of line items for an order
+  const calculateTotal = (lineItems) => {
+    let totalPrice = 0
+    lineItems.forEach((item) => {
+      totalPrice += item.product.price
+    })
+    return totalPrice.toFixed(2) // Adjust to 2 decimal places
+  }
+
   return (
     <>
       <CardLayout title="Your Orders">
         <Table headers={headers}>
           {orders.map((order) => (
             <tr key={order.id}>
-              <td>{order.completed_on}</td>
-              <td>${order.total}</td>
-              <td>{order.payment_type?.obscured_num}</td>
+              <td>{order.created_date}</td>
+              <td>${calculateTotal(order.lineitems)}</td>
+              <td>{order.payment?.merchant_name}</td>
             </tr>
           ))}
         </Table>
