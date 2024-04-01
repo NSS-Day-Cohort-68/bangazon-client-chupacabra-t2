@@ -11,7 +11,7 @@ import {
   addPaymentType,
   getPaymentTypes,
   deletePaymentType,
-} from "../data/payment"
+} from "../data/payment-types"
 
 export default function Payments() {
   const headers = ["Merchant Name", "Card Number", ""]
