@@ -19,6 +19,8 @@ export default function Cart() {
     getCart().then((cartData) => {
       if (cartData) {
         setCart(cartData)
+      } else {
+        setCart({})
       }
     })
   }
@@ -33,13 +35,13 @@ export default function Cart() {
   }, [])
 
   const completeOrder = (paymentTypeId) => {
-    completeCurrentOrder(cart.id, paymentTypeId).then(() =>
+    completeCurrentOrder(cart.id, parseInt(paymentTypeId)).then(() =>
       router.push("/my-orders")
     )
   }
 
-  const removeProduct = (productId) => {
-    removeProductFromOrder(productId).then(refresh)
+  const removeProduct = (product_id) => {
+    removeProductFromOrder(product_id).then(refresh)
   }
 
   return (
@@ -51,7 +53,12 @@ export default function Cart() {
         completeOrder={completeOrder}
       />
       <CardLayout title="Your Current Order">
-        <CartDetail cart={cart} removeProduct={removeProduct} />
+        {Object.keys(cart).length > 0 ? (
+          <CartDetail cart={cart} removeProduct={removeProduct} />
+        ) : (
+          <div>No Items in Cart</div>
+        )}
+
         <>
           <a
             className="card-footer-item"
