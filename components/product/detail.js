@@ -10,8 +10,8 @@ export function Detail({ product, like, unlike }) {
   const [showModal, setShowModal] = useState(false)
   const [showError, setShowError] = useState(false)
 
-  const addToCart = () => {
-    addProductToOrder(product.id).then(() => {
+  const addToCart = (productId) => {
+    addProductToOrder(productId).then(() => {
       router.push("/cart")
     })
   }
@@ -46,7 +46,7 @@ export function Detail({ product, like, unlike }) {
           <button className="button is-success" onClick={recommendProductEvent}>
             Recommend Product
           </button>
-          <button className="button" onClick={() => setShowModal(false)}>
+          <button className="button" onClick={(event) => setShowModal(false)}>
             Cancel
           </button>
         </>
@@ -71,7 +71,10 @@ export function Detail({ product, like, unlike }) {
           <article className="tile is-child is-align-self-center">
             <div className="field is-grouped">
               <p className="control">
-                <button className="button is-primary" onClick={addToCart}>
+                <button
+                  className="button is-primary"
+                  onClick={() => addToCart(product.id)}
+                >
                   Add to Cart
                 </button>
               </p>
