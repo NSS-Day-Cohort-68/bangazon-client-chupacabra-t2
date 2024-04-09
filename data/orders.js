@@ -9,7 +9,7 @@ export function getCart() {
 }
 
 export function clearCart() {
-  return fetchWithoutResponse("cart/clear-cart/", {
+  return fetchWithoutResponse("cart", {
     method: "DELETE",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
