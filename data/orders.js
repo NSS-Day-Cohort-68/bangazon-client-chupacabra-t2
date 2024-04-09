@@ -1,7 +1,16 @@
-import { fetchWithResponse } from "./fetcher"
+import { fetchWithResponse, fetchWithoutResponse } from "./fetcher"
 
 export function getCart() {
   return fetchWithResponse("cart", {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  })
+}
+
+export function clearCart() {
+  return fetchWithoutResponse("cart/clear-cart/", {
+    method: "DELETE",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
