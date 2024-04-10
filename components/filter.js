@@ -16,9 +16,12 @@ export default function Filter({ productCount, onSearch, locations }) {
   const [showFilters, setShowFilters] = useState(false)
   const [query, setQuery] = useState("")
   const [categories, setCategories] = useState([
-    { id: 1, name: "Apples" },
-    { id: 2, name: "Oranges" },
-    { id: 3, name: "Lemons" },
+    { id: 1, name: "Tools" },
+    { id: 2, name: "Auto" },
+    { id: 3, name: "Technology" },
+    { id: 4, name: "Arts & Crafts" },
+    { id: 5, name: "Clothes" },
+    { id: 6, name: "Games/Toys" },
   ])
   const [direction, setDirection] = useState("asc")
   const clear = () => {
