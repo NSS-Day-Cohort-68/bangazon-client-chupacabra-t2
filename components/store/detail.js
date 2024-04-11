@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { StoreProductCard } from "../store-products/card.js"
 
 export default function Detail({ store, isOwner, favorite, unfavorite }) {
   const ownerButtons = () => {
@@ -55,6 +56,7 @@ export default function Detail({ store, isOwner, favorite, unfavorite }) {
         <p className="title">{store.name}</p>
         <p className="subtitle">{store.description}</p>
       </div>
+      <></>
     </section>
   )
 }
