@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Layout from "../../../components/layout"
 import Navbar from "../../../components/navbar"
-import { ProductCard } from "../../../components/product/card"
 import Detail from "../../../components/store/detail"
 import { useAppContext } from "../../../context/state"
 import { deleteProduct } from "../../../data/products"
@@ -12,23 +11,23 @@ import {
   unfavoriteStore,
 } from "../../../data/stores"
 import { StoreProductCard } from "../../../components/store-products/card.js"
+import { getUserProfile } from "../../../data/auth.js"
 
 export default function StoreDetail() {
-  const { profile } = useAppContext()
+  const { profile, setProfile } = useAppContext()
   const router = useRouter()
   const { id } = router.query
   const [store, setStore] = useState({})
   const [isOwner, setIsOwner] = useState(false)
 
   useEffect(() => {
-    //This needs to be changed to reflect if the logged in user is the store owner
-    if (id) {
-      refresh()
-    }
-    if (parseInt(id) === profile.store?.id) {
-      setIsOwner(true)
-    }
-  }, [id, profile])
+    getUserProfile().then((profileData) => {
+      setProfile(profileData)
+      if (store.seller === profile.id) {
+        setIsOwner(true)
+      }
+    })
+  }, [])
 
   const refresh = () =>
     getStoreById(id).then((storeData) => {

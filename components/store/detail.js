@@ -56,7 +56,6 @@ export default function Detail({ store, isOwner, favorite, unfavorite }) {
         <p className="title">{store.name}</p>
         <p className="subtitle">{store.description}</p>
       </div>
-      <></>
     </section>
   )
 }
