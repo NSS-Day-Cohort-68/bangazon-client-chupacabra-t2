@@ -86,6 +86,7 @@ export default function Detail({ favorite, unfavorite }) {
         <div className="hero-body">
           <p className="title">{store.name}</p>
           <p className="subtitle">{store.description}</p>
+          <p className="products">{store.product_count} items for sale</p>
         </div>
       </section>
       <section>
