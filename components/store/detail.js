@@ -2,12 +2,12 @@ import Link from "next/link"
 import { StoreProductCard } from "../store-products/card.js"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import { useAppContext } from "../../context/state.js"
-import { getUserProfile } from "../../data/auth.js"
 import { getStoreById } from "../../data/stores.js"
+import { getStoreProducts } from "../../data/products"
 
 export default function Detail({ favorite, unfavorite }) {
   const [store, setStore] = useState({})
+  const [storeProducts, setStoreProducts] = useState([])
   // const { profile, setProfile } = useAppContext()
   const [isOwner, setIsOwner] = useState(false)
   const router = useRouter()
@@ -22,14 +22,15 @@ export default function Detail({ favorite, unfavorite }) {
     })
   }, [id])
 
-  // useEffect(() => {
-  //   getUserProfile().then((profileData) => {
-  //     setProfile(profileData)
-  //     if (store.seller === profile.user.id) {
-  //       setIsOwner(true)
-  //     }
-  //   })
-  // }, [])
+  const storeId = store.id
+
+  useEffect(() => {
+    if (storeId) {
+      getStoreProducts(storeId).then((data) => {
+        setStoreProducts(data)
+      })
+    }
+  }, [storeId])
 
   const ownerButtons = () => {
     return (
@@ -69,22 +70,30 @@ export default function Detail({ favorite, unfavorite }) {
   }
 
   return (
-    <section className="hero is-primary mb-3">
-      <div className="hero-head">
-        <nav className="navbar">
-          <div className="navbar-menu">
-            <div className="navbar-end">
-              <span className="navbar-item">
-                {isOwner ? ownerButtons() : userButtons()}
-              </span>
+    <>
+      <section className="hero is-primary mb-3">
+        <div className="hero-head">
+          <nav className="navbar">
+            <div className="navbar-menu">
+              <div className="navbar-end">
+                <span className="navbar-item">
+                  {isOwner ? ownerButtons() : userButtons()}
+                </span>
+              </div>
             </div>
-          </div>
-        </nav>
-      </div>
-      <div className="hero-body">
-        <p className="title">{store.name}</p>
-        <p className="subtitle">{store.description}</p>
-      </div>
-    </section>
+          </nav>
+        </div>
+        <div className="hero-body">
+          <p className="title">{store.name}</p>
+          <p className="subtitle">{store.description}</p>
+        </div>
+      </section>
+      <section>
+        <div className="store products list"></div>
+        {storeProducts.map((product) => (
+          <StoreProductCard product={product} key={product.id} />
+        ))}
+      </section>
+    </>
   )
 }

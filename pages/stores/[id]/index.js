@@ -14,29 +14,9 @@ import { StoreProductCard } from "../../../components/store-products/card.js"
 import { getUserProfile } from "../../../data/auth.js"
 
 export default function StoreDetail() {
-  // const { profile, setProfile } = useAppContext()
   const router = useRouter()
   const { id } = router.query
   const [store, setStore] = useState({})
-  // const [isOwner, setIsOwner] = useState(false)
-
-  ////These two useEffects are not working at all. They are not bringing their props to the child page
-  // useEffect(() => {
-  //   getUserProfile().then((profileData) => {
-  //     setProfile(profileData)
-  //     if (profile.id === store.seller) {
-  //       setIsOwner(true)
-  //     }
-  //   })
-  // }, [])
-
-  // useEffect(() => {
-  //   getStoreById(id).then((storeData) => {
-  //     if (storeData) {
-  //       setStore(storeData)
-  //     }
-  //   })
-  // }, [])
 
   const removeProduct = (productId) => {
     deleteProduct(productId).then(refresh)
@@ -52,18 +32,12 @@ export default function StoreDetail() {
 
   return (
     <>
-      <Detail
-        // store={store}
-        // isOwner={isOwner}
-        favorite={favorite}
-        unfavorite={unfavorite}
-      />
+      <Detail favorite={favorite} unfavorite={unfavorite} />
       <div className="columns is-multiline">
         {store.products?.map((product) => (
           <StoreProductCard
             product={product}
             key={product.id}
-            // isOwner={isOwner}
             removeProduct={removeProduct}
           />
         ))}
