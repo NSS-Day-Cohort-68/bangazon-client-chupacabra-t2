@@ -1,7 +1,36 @@
 import Link from "next/link"
 import { StoreProductCard } from "../store-products/card.js"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { useAppContext } from "../../context/state.js"
+import { getUserProfile } from "../../data/auth.js"
+import { getStoreById } from "../../data/stores.js"
 
-export default function Detail({ store, isOwner, favorite, unfavorite }) {
+export default function Detail({ favorite, unfavorite }) {
+  const [store, setStore] = useState({})
+  // const { profile, setProfile } = useAppContext()
+  const [isOwner, setIsOwner] = useState(false)
+  const router = useRouter()
+  const { id } = router.query
+
+  useEffect(() => {
+    getStoreById(id).then((storeData) => {
+      if (storeData) {
+        setStore(storeData)
+        setIsOwner(storeData.is_owner) // Use storeData.is_owner to set isOwner
+      }
+    })
+  }, [id])
+
+  // useEffect(() => {
+  //   getUserProfile().then((profileData) => {
+  //     setProfile(profileData)
+  //     if (store.seller === profile.user.id) {
+  //       setIsOwner(true)
+  //     }
+  //   })
+  // }, [])
+
   const ownerButtons = () => {
     return (
       <div className="buttons">
