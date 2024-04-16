@@ -19,7 +19,10 @@ export default function NewProduct() {
       location: location.value,
       quantity: quantity.value,
     }
-    addProduct(product).then((res) => router.push(`/products/${res.id}`))
+    // addProduct(product).then((res) => router.push(`/products/${res.id}`))
+    addProduct(product).then(() => {
+      router.push("/products/{product.id")
+    })
   }
 
   return (

@@ -1,6 +1,8 @@
 import Link from "next/link"
 
 export function StoreCard({ store, width = "is-half" }) {
+  // sellerName = store.seller.customer.user.first_name
+
   return (
     <div className={`column ${width}`}>
       <div className="card">
@@ -9,7 +11,8 @@ export function StoreCard({ store, width = "is-half" }) {
         </header>
         <div className="card-content">
           <p className="content">
-            Owner: {store.seller.first_name} {store.seller.last_name}
+            Owner:
+            {`${store.seller_info.first_name} ${store.seller_info.last_name}`}
           </p>
           <div className="content">{store.description}</div>
         </div>
